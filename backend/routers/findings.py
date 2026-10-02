@@ -70,11 +70,13 @@ def list_findings(
         {
             "id": str(f.id),
             "scan_id": str(f.scan_id) if f.scan_id else None,
+            "target_id": str(f.target_id),
             "attack_type": f.attack_type.value,
             "severity": f.severity.value,
             "status": f.status.value,
             "layer_failed": f.layer_failed,
             "risk_score": f.risk_score,
+            "confidence": f.confidence,
             "owasp_category": f.owasp_category,
             "created_at": f.created_at.isoformat(),
         }

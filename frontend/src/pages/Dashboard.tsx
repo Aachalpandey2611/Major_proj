@@ -77,17 +77,45 @@ export default function Dashboard() {
   }).length;
 
   const findingsBySeverity = {
-    critical: findings.filter((f) => f.severity === 'critical').length,
-    high: findings.filter((f) => f.severity === 'high').length,
-    medium: findings.filter((f) => f.severity === 'medium').length,
-    low: findings.filter((f) => f.severity === 'low').length,
+    critical: findings.filter((f) => f.severity === 'critical' && f.status === 'open').length,
+    high: findings.filter((f) => f.severity === 'high' && f.status === 'open').length,
+    medium: findings.filter((f) => f.severity === 'medium' && f.status === 'open').length,
+    low: findings.filter((f) => f.severity === 'low' && f.status === 'open').length,
   };
+
+  // Calculate average confidence score across all vulnerabilities
+  const openFindings = findings.filter((f) => f.status === 'open');
+  const avgConfidenceScore = openFindings.length > 0
+    ? Math.round((openFindings.reduce((sum, f) => sum + (f.confidence || 0), 0) / openFindings.length) * 100)
+    : 0;
+
+  // Calculate overall security posture (0-100, higher is better)
+  const totalPossibleVulnerabilities = targets.length * 15; // 15 attack types per target
+  const actualVulnerabilities = openFindings.length;
+  const overallSecurityScore = totalPossibleVulnerabilities > 0
+    ? Math.round((1 - (actualVulnerabilities / totalPossibleVulnerabilities)) * 100)
+    : 100;
 
   const severityChartData = [
     { name: 'Critical', value: findingsBySeverity.critical, color: SEVERITY_COLORS.critical },
     { name: 'High', value: findingsBySeverity.high, color: SEVERITY_COLORS.high },
     { name: 'Medium', value: findingsBySeverity.medium, color: SEVERITY_COLORS.medium },
     { name: 'Low', value: findingsBySeverity.low, color: SEVERITY_COLORS.low },
+  ].filter((item) => item.value > 0);
+
+  // Confidence score distribution
+  const confidenceRanges = {
+    'High (80-100%)': openFindings.filter((f) => (f.confidence || 0) >= 0.8).length,
+    'Medium (60-79%)': openFindings.filter((f) => (f.confidence || 0) >= 0.6 && (f.confidence || 0) < 0.8).length,
+    'Low (40-59%)': openFindings.filter((f) => (f.confidence || 0) >= 0.4 && (f.confidence || 0) < 0.6).length,
+    'Very Low (<40%)': openFindings.filter((f) => (f.confidence || 0) < 0.4).length,
+  };
+
+  const confidenceChartData = [
+    { name: 'High (80-100%)', value: confidenceRanges['High (80-100%)'], color: '#ef4444' },
+    { name: 'Medium (60-79%)', value: confidenceRanges['Medium (60-79%)'], color: '#f59e0b' },
+    { name: 'Low (40-59%)', value: confidenceRanges['Low (40-59%)'], color: '#fbbf24' },
+    { name: 'Very Low (<40%)', value: confidenceRanges['Very Low (<40%)'], color: '#60a5fa' },
   ].filter((item) => item.value > 0);
 
   // Attack types bar chart
@@ -166,29 +194,40 @@ export default function Dashboard() {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
         <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
           <div className="text-sm text-ink-soft mb-1">Targets Monitored</div>
           <div className="text-3xl font-bold text-ink">{targets.length}</div>
         </div>
         <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
-          <div className="text-sm text-ink-soft mb-1">Scans This Month</div>
-          <div className="text-3xl font-bold text-ink">{scansThisMonth}</div>
+          <div className="text-sm text-ink-soft mb-1">Overall Security</div>
+          <div className={`text-3xl font-bold ${
+            overallSecurityScore >= 80 ? 'text-emerald-600' : 
+            overallSecurityScore >= 60 ? 'text-amber-600' : 'text-red-600'
+          }`}>
+            {overallSecurityScore}%
+          </div>
+        </div>
+        <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
+          <div className="text-sm text-ink-soft mb-1">Avg Confidence</div>
+          <div className="text-3xl font-bold text-accent-purple">{avgConfidenceScore}%</div>
+          <div className="text-xs text-ink-soft mt-1">of vulnerabilities</div>
         </div>
         <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
           <div className="text-sm text-ink-soft mb-1">Open Vulnerabilities</div>
           <div className="text-3xl font-bold text-red-600">
-            {findings.filter((f) => f.status === 'open').length}
+            {openFindings.length}
           </div>
         </div>
         <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
-          <div className="text-sm text-ink-soft mb-1">Total Findings</div>
-          <div className="text-3xl font-bold text-ink">{findings.length}</div>
+          <div className="text-sm text-ink-soft mb-1">Total Scans</div>
+          <div className="text-3xl font-bold text-ink">{scansThisMonth}</div>
+          <div className="text-xs text-ink-soft mt-1">this month</div>
         </div>
       </div>
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         {/* Findings by Severity (Pie Chart) */}
         <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
           <h2 className="text-xl font-bold mb-6 text-ink">Findings by Severity</h2>
@@ -219,9 +258,40 @@ export default function Dashboard() {
           )}
         </div>
 
+        {/* Confidence Score Distribution */}
+        <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
+          <h2 className="text-xl font-bold mb-6 text-ink">Confidence Distribution</h2>
+          {confidenceChartData.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={confidenceChartData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, value }) => `${value}`}
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {confidenceChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="h-[300px] flex items-center justify-center text-ink-soft">
+              No confidence data
+            </div>
+          )}
+        </div>
+
         {/* Detection Rate Over Time (Line Chart) */}
         <div className="p-6 rounded-2xl bg-white border border-border shadow-sm">
-          <h2 className="text-xl font-bold mb-6 text-ink">Detection Rate (Last 7 Days)</h2>
+          <h2 className="text-xl font-bold mb-6 text-ink">Detection Rate (7 Days)</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={detectionRateData}>
               <CartesianGrid strokeDasharray="3 3" />
